@@ -20,11 +20,11 @@ function App() {
 	const [state, setState] = useState({
 		todo: {
 			title: "Todo",
-			items: [item]
+			items: [item, item2]
 		},
 		"in-progress": {
 			title: "In Progress",
-			items: [item2]
+			items: []
 		},
 		done: {
 			title: "Completed",
@@ -69,6 +69,7 @@ function App() {
 													</Draggable>
 												);
 											})}
+											{provided.placeholder}
 										</div>
 									);
 								}}
