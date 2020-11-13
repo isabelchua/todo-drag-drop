@@ -6,7 +6,7 @@ import { v4 } from "uuid";
 
 const item = {
 	id: v4(),
-	name: "Clean the house"
+	name: "Wake up"
 };
 
 const item2 = {
@@ -32,9 +32,37 @@ function App() {
 		}
 	});
 
+	const handleDragEnd = ({ destination, source }) => {
+		//console.log(data);
+		console.log("from", source);
+		console.log("to", destination);
+
+		if (!destination) {
+			console.log("not dropped in droppable");
+			return;
+		}
+
+		if (
+			destination.index === source.index &&
+			destination.droppableId === source.droppableId
+		) {
+			console.log("dropped in same place");
+			return;
+		}
+
+		// const itemCopy = state[source.droppableId].items[source.index]
+		const itemCopy = { ...state[source.droppableId].items[source.index] };
+		setState(prev => {
+			prev = { ...prev };
+			prev[source.droppableId].items.splice(source.index, 1);
+			return prev;
+		});
+		//console.log(itemCopy);
+	};
+
 	return (
 		<div className="App">
-			<DragDropContext onDragEnd={e => console.log(e)}>
+			<DragDropContext onDragEnd={handleDragEnd}>
 				{_.map(state, (data, key) => {
 					return (
 						<div key={key} className="column">

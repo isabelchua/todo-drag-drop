@@ -19,6 +19,7 @@
 
 .item {
 	margin-bottom: 10px;
+	background-color: gray;
 	color: white;
 	border: 1px solid white;
 	padding: 5px;
