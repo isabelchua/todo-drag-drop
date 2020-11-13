@@ -17,6 +17,7 @@ const item2 = {
 console.log(item);
 
 function App() {
+	const [text, setText] = useState("");
 	const [state, setState] = useState({
 		todo: {
 			title: "Todo",
@@ -51,17 +52,55 @@ function App() {
 		}
 
 		// const itemCopy = state[source.droppableId].items[source.index]
+
+		// creating a copy of item before removing it from state
 		const itemCopy = { ...state[source.droppableId].items[source.index] };
 		setState(prev => {
 			prev = { ...prev };
+			// remove from previous items array
 			prev[source.droppableId].items.splice(source.index, 1);
+
+			// adding to new items array location
+			prev[destination.droppableId].items.splice(
+				destination.index,
+				0,
+				itemCopy
+			);
+
 			return prev;
 		});
 		//console.log(itemCopy);
 	};
 
+	const addItem = () => {
+		setState(prev => {
+			return {
+				...prev,
+				todo: {
+					Title: "title",
+					items: [
+						{
+							id: "",
+							name: text
+						},
+						...prev.todo.items
+					]
+				}
+			};
+		});
+		setText();
+	};
+
 	return (
 		<div className="App">
+			<div>
+				<input
+					type="text"
+					value={text}
+					onChange={e => setText(e.target.value)}
+				/>
+				<button onClick={addItem}>Add</button>
+			</div>
 			<DragDropContext onDragEnd={handleDragEnd}>
 				{_.map(state, (data, key) => {
 					return (
@@ -82,10 +121,14 @@ function App() {
 														index={index}
 														draggableId={el.id}
 													>
-														{provided => {
+														{(provided, snapshot) => {
+															console.log(snapshot);
 															return (
 																<div
-																	className="item"
+																	className={`item ${
+																		snapshot.isDragging &&
+																		"dragging"
+																	}`}
 																	ref={provided.innerRef}
 																	{...provided.draggableProps}
 																	{...provided.dragHandleProps}
