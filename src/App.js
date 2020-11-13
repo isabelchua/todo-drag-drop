@@ -54,9 +54,10 @@ function App() {
 														index={index}
 														draggableId={el.id}
 													>
-														{proveided => {
+														{provided => {
 															return (
 																<div
+																	className="item"
 																	ref={provided.innerRef}
 																	{...provided.draggableProps}
 																	{...provided.dragHandleProps}
