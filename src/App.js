@@ -1,22 +1,30 @@
 import "./App.css";
 import { useState } from "react";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import _ from "lodash";
+import { v4 } from "uuid";
 
 const item = {
-	id: "asdasd",
+	id: v4(),
 	name: "Clean the house"
 };
+
+const item2 = {
+	id: v4(),
+	name: "Clean the house"
+};
+
+console.log(item);
 
 function App() {
 	const [state, setState] = useState({
 		todo: {
-			title: "",
-			items: []
+			title: "Todo",
+			items: [item]
 		},
 		"in-progress": {
 			title: "In Progress",
-			items: []
+			items: [item2]
 		},
 		done: {
 			title: "Completed",
@@ -29,9 +37,41 @@ function App() {
 			<DragDropContext onDragEnd={e => console.log(e)}>
 				{_.map(state, (data, key) => {
 					return (
-						<div className="column">
+						<div key={key} className="column">
 							<h3>{data.title}</h3>
-							<Droppable>{provided => {}}</Droppable>
+							<Droppable droppableId={key}>
+								{provided => {
+									return (
+										<div
+											ref={provided.innerRef}
+											{...provided.droppableProps}
+											className="droppable-col"
+										>
+											{data.items.map((el, index) => {
+												return (
+													<Draggable
+														key={el.id}
+														index={index}
+														draggableId={el.id}
+													>
+														{proveided => {
+															return (
+																<div
+																	ref={provided.innerRef}
+																	{...provided.draggableProps}
+																	{...provided.dragHandleProps}
+																>
+																	{el.name}
+																</div>
+															);
+														}}
+													</Draggable>
+												);
+											})}
+										</div>
+									);
+								}}
+							</Droppable>
 						</div>
 					);
 				})}
