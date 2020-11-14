@@ -77,8 +77,19 @@ button {
 	border-radius: 5px;
 }
 
-.Todo {
-	background-color: rgb(7, 185, 60);
+.column {
 	border-radius: 5px;
 	padding: 15px;
+}
+
+.Todo {
+	background-color: rgb(7, 185, 60);
+}
+
+.Progress {
+	background-color: rgb(223, 104, 7);
+}
+
+.Completed {
+	background-color: rgb(7, 47, 223);
 }
