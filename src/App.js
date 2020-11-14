@@ -98,7 +98,7 @@ function App() {
 				<DragDropContext onDragEnd={handleDragEnd}>
 					{_.map(state, (data, key) => {
 						return (
-							<div key={key} className="column">
+							<div key={key} className={`column ${data.title}`}>
 								<h3>{data.title}</h3>
 								<div>
 									<Droppable droppableId={key}>
