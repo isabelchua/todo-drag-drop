@@ -3,6 +3,7 @@ import { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import _ from "lodash";
 import { v4 } from "uuid";
+import InputField from "./components/InputField";
 
 const item = {
 	id: v4(),
@@ -14,10 +15,10 @@ const item2 = {
 	name: "Clean the house"
 };
 
-console.log(item);
+//console.log(item);
 
 function App() {
-	const [text, setText] = useState("");
+	//const [text, setText] = useState("");
 	const [state, setState] = useState({
 		todo: {
 			title: "Todo",
@@ -64,36 +65,37 @@ function App() {
 		});
 	};
 
-	const addItem = () => {
-		setState(prev => {
-			return {
-				...prev,
-				todo: {
-					title: "Todo",
-					items: [
-						{
-							id: v4(),
-							name: text
-						},
-						...prev.todo.items
-					]
-				}
-			};
-		});
+	// const addItem = () => {
+	// 	setState(prev => {
+	// 		return {
+	// 			...prev,
+	// 			todo: {
+	// 				title: "Todo",
+	// 				items: [
+	// 					{
+	// 						id: v4(),
+	// 						name: text
+	// 					},
+	// 					...prev.todo.items
+	// 				]
+	// 			}
+	// 		};
+	// 	});
 
-		setText("");
-	};
+	// 	setText("");
+	// };
 
 	return (
 		<div className="App">
-			<div className="inputfield">
+			<InputField />
+			{/* <div className="inputfield">
 				<input
 					type="text"
 					value={text}
 					onChange={e => setText(e.target.value)}
 				/>
 				<button onClick={addItem}>Add</button>
-			</div>
+			</div> */}
 			<div className="lists">
 				<DragDropContext onDragEnd={handleDragEnd}>
 					{_.map(state, (data, key) => {
