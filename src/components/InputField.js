@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
+// import {useSelector} from 'react-redux'
+import { useDispatch } from "react-redux";
 
 const item = {
 	id: v4(),
@@ -12,6 +14,8 @@ const item2 = {
 };
 
 export function InputField() {
+	const dispatch = useDispatch();
+	// const allList = useSelector(state => state.)
 	const [text, setText] = useState("");
 	const [state, setState] = useState({
 		todo: {
@@ -29,6 +33,12 @@ export function InputField() {
 	});
 
 	const addItem = () => {
+		dispatch({
+			type: "CREATE_TODO",
+			payload: {
+				name: text
+			}
+		});
 		setState(prev => {
 			return {
 				...prev,

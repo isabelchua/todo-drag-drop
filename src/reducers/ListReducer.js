@@ -18,6 +18,10 @@ const ListReducer = (state = initialState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
+		case "CREATE_TODO":
+			console.log("todo", payload.name);
+			console.log("state", state);
+			return [...state, { id: v4(), name: payload.name }];
 		default:
 			return state;
 	}
