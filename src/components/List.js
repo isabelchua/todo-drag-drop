@@ -16,22 +16,24 @@ const item2 = {
 
 const List = () => {
 	const allList = useSelector(state => state.list);
-	console.log(allList);
+	console.log("allList", allList);
 
 	const [state, setState] = useState({
-		// todo: {
-		// 	title: "Todo",
-		// 	items: [item, item2]
-		// },
-		// "in-progress": {
-		// 	title: "In Progress",
-		// 	items: []
-		// },
-		// done: {
-		// 	title: "Completed",
-		// 	items: []
-		// }
+		todo: {
+			title: "Todo",
+			items: [item, item2]
+		},
+		"in-progress": {
+			title: "In Progress",
+			items: []
+		},
+		done: {
+			title: "Completed",
+			items: []
+		}
 	});
+
+	console.log("state ", state);
 
 	const handleDragEnd = ({ destination, source }) => {
 		if (!destination) {
@@ -68,14 +70,48 @@ const List = () => {
 		<div className="lists">
 			aaaaa
 			<DragDropContext onDragEnd={handleDragEnd}>
-				{allList.map(data => {
+				{_.map(allList, (data, key) => {
 					return (
-						<div className={`column ${data.title}`}>
-							<h3>{data.title}f</h3>
+						<div key={key} className={`column ${data.title}`}>
+							<h3>{data.title}</h3>
 							<div>
-								<Droppable droppableId={data.id}>
+								<Droppable droppableId={key}>
 									{provided => {
-										return <div></div>;
+										return (
+											<div
+												ref={provided.innerRef}
+												{...provided.droppableProps}
+												className="droppable-col"
+											>
+												{data.items.map((el, index) => {
+													return (
+														<Draggable
+															key={el.id}
+															index={index}
+															draggableId={el.id}
+														>
+															{(provided, snapshot) => {
+																//console.log(snapshot);
+																return (
+																	<div
+																		className={`item ${
+																			snapshot.isDragging &&
+																			"dragging"
+																		}`}
+																		ref={provided.innerRef}
+																		{...provided.draggableProps}
+																		{...provided.dragHandleProps}
+																	>
+																		{el.name}
+																	</div>
+																);
+															}}
+														</Draggable>
+													);
+												})}
+												{provided.placeholder}
+											</div>
+										);
 									}}
 								</Droppable>
 							</div>

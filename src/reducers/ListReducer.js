@@ -11,22 +11,20 @@ const item2 = {
 	name: "Clean the house"
 };
 
-const initialState = [
-	{
-		todo: {
-			title: "Todo",
-			items: [item, item2]
-		},
-		"in-progress": {
-			title: "In Progress",
-			items: []
-		},
-		done: {
-			title: "Completed",
-			items: []
-		}
+const initialState = {
+	todo: {
+		title: "Todo",
+		items: [item, item2]
+	},
+	"in-progress": {
+		title: "In Progress",
+		items: []
+	},
+	done: {
+		title: "Completed",
+		items: []
 	}
-];
+};
 
 const ListReducer = (state = initialState, action) => {
 	const { type, payload } = action;
