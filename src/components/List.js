@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const item = {
 	id: v4(),
-	name: "Wake up"
+	name: "Wake up 2"
 };
 
 const item2 = {
@@ -19,18 +19,18 @@ const List = () => {
 	console.log(allList);
 
 	const [state, setState] = useState({
-		todo: {
-			title: "Todo",
-			items: [item, item2]
-		},
-		"in-progress": {
-			title: "In Progress",
-			items: []
-		},
-		done: {
-			title: "Completed",
-			items: []
-		}
+		// todo: {
+		// 	title: "Todo",
+		// 	items: [item, item2]
+		// },
+		// "in-progress": {
+		// 	title: "In Progress",
+		// 	items: []
+		// },
+		// done: {
+		// 	title: "Completed",
+		// 	items: []
+		// }
 	});
 
 	const handleDragEnd = ({ destination, source }) => {
@@ -46,70 +46,36 @@ const List = () => {
 		}
 
 		// Creating a copy of item before removing it from state
-		const itemCopy = { ...state[source.droppableId].items[source.index] };
+		// const itemCopy = { ...allList[source.droppableId].items[source.index] };
 
-		setState(prev => {
-			prev = { ...prev };
-			// Remove from previous items array
-			prev[source.droppableId].items.splice(source.index, 1);
+		// setState(prev => {
+		// 	prev = { ...prev };
+		// 	// Remove from previous items array
+		// 	prev[source.droppableId].items.splice(source.index, 1);
 
-			// Adding to new items array location
-			prev[destination.droppableId].items.splice(
-				destination.index,
-				0,
-				itemCopy
-			);
+		// 	// Adding to new items array location
+		// 	prev[destination.droppableId].items.splice(
+		// 		destination.index,
+		// 		0,
+		// 		itemCopy
+		// 	);
 
-			return prev;
-		});
+		// 	return prev;
+		// });
 	};
 
 	return (
 		<div className="lists">
-			{/* aaaaa */}
+			aaaaa
 			<DragDropContext onDragEnd={handleDragEnd}>
-				{_.map(state, (data, key) => {
+				{allList.map(data => {
 					return (
-						<div key={key} className={`column ${data.title}`}>
-							<h3>{data.title}</h3>
+						<div className={`column ${data.title}`}>
+							<h3>{data.title}f</h3>
 							<div>
-								<Droppable droppableId={key}>
+								<Droppable droppableId={data.id}>
 									{provided => {
-										return (
-											<div
-												ref={provided.innerRef}
-												{...provided.droppableProps}
-												className="droppable-col"
-											>
-												{data.items.map((el, index) => {
-													return (
-														<Draggable
-															key={el.id}
-															index={index}
-															draggableId={el.id}
-														>
-															{(provided, snapshot) => {
-																//console.log(snapshot);
-																return (
-																	<div
-																		className={`item ${
-																			snapshot.isDragging &&
-																			"dragging"
-																		}`}
-																		ref={provided.innerRef}
-																		{...provided.draggableProps}
-																		{...provided.dragHandleProps}
-																	>
-																		{el.name}
-																	</div>
-																);
-															}}
-														</Draggable>
-													);
-												})}
-												{provided.placeholder}
-											</div>
-										);
+										return <div></div>;
 									}}
 								</Droppable>
 							</div>
@@ -122,3 +88,35 @@ const List = () => {
 };
 
 export default List;
+
+// ref={provided.innerRef}
+// 												{...provided.droppableProps}
+// 												className="droppable-col"
+// 											>
+// 												{data.items.map((el, index) => {
+// 													return (
+// 														<Draggable
+// 															key={el.id}
+// 															index={index}
+// 															draggableId={el.id}
+// 														>
+// 															{(provided, snapshot) => {
+// 																//console.log(snapshot);
+// 																return (
+// 																	<div
+// 																		className={`item ${
+// 																			snapshot.isDragging &&
+// 																			"dragging"
+// 																		}`}
+// 																		ref={provided.innerRef}
+// 																		{...provided.draggableProps}
+// 																		{...provided.dragHandleProps}
+// 																	>
+// 																		{el.name}
+// 																	</div>
+// 																);
+// 															}}
+// 														</Draggable>
+// 													);
+// 												})}
+// 												{provided.placeholder}

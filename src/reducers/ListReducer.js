@@ -1,16 +1,30 @@
 import { initial } from "lodash";
 import { v4 } from "uuid";
 
+const item = {
+	id: v4(),
+	name: "Wake up 2"
+};
+
+const item2 = {
+	id: v4(),
+	name: "Clean the house"
+};
+
 const initialState = [
 	{
-		id: 1,
-		name: "gym",
-		duration: "1 hour"
-	},
-
-	{
-		id: 1,
-		name: "John Doe"
+		todo: {
+			title: "Todo",
+			items: [item, item2]
+		},
+		"in-progress": {
+			title: "In Progress",
+			items: []
+		},
+		done: {
+			title: "Completed",
+			items: []
+		}
 	}
 ];
 

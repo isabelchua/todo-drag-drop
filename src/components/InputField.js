@@ -17,20 +17,20 @@ export function InputField() {
 	const dispatch = useDispatch();
 	// const allList = useSelector(state => state.)
 	const [text, setText] = useState("");
-	const [state, setState] = useState({
-		todo: {
-			title: "Todo",
-			items: [item, item2]
-		},
-		"in-progress": {
-			title: "In Progress",
-			items: []
-		},
-		done: {
-			title: "Completed",
-			items: []
-		}
-	});
+	// const [state, setState] = useState({
+	// 	todo: {
+	// 		title: "Todo",
+	// 		items: [item, item2]
+	// 	},
+	// 	"in-progress": {
+	// 		title: "In Progress",
+	// 		items: []
+	// 	},
+	// 	done: {
+	// 		title: "Completed",
+	// 		items: []
+	// 	}
+	// });
 
 	const addItem = () => {
 		dispatch({
@@ -39,21 +39,21 @@ export function InputField() {
 				name: text
 			}
 		});
-		setState(prev => {
-			return {
-				...prev,
-				todo: {
-					title: "Todo",
-					items: [
-						{
-							id: v4(),
-							name: text
-						},
-						...prev.todo.items
-					]
-				}
-			};
-		});
+		// setState(prev => {
+		// 	return {
+		// 		...prev,
+		// 		todo: {
+		// 			title: "Todo",
+		// 			items: [
+		// 				{
+		// 					id: v4(),
+		// 					name: text
+		// 				},
+		// 				...prev.todo.items
+		// 			]
+		// 		}
+		// 	};
+		// });
 		setText("");
 	};
 
