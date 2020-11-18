@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import _ from "lodash";
 import { v4 } from "uuid";
+import { useSelector } from "react-redux";
 
 const item = {
 	id: v4(),
@@ -14,6 +15,9 @@ const item2 = {
 };
 
 const List = () => {
+	const allList = useSelector(state => state.list);
+	console.log(allList);
+
 	const [state, setState] = useState({
 		todo: {
 			title: "Todo",
@@ -62,7 +66,7 @@ const List = () => {
 
 	return (
 		<div className="lists">
-			aaaaa
+			{/* aaaaa */}
 			<DragDropContext onDragEnd={handleDragEnd}>
 				{_.map(state, (data, key) => {
 					return (
