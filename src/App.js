@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import _ from "lodash";
 import { v4 } from "uuid";
 import InputField from "./components/InputField";
+import List from "./components/List";
 
 const item = {
 	id: v4(),
@@ -19,6 +20,7 @@ const item2 = {
 
 function App() {
 	//const [text, setText] = useState("");
+
 	const [state, setState] = useState({
 		todo: {
 			title: "Todo",
@@ -96,7 +98,8 @@ function App() {
 				/>
 				<button onClick={addItem}>Add</button>
 			</div> */}
-			<div className="lists">
+			<List />
+			{/* <div className="lists">
 				<DragDropContext onDragEnd={handleDragEnd}>
 					{_.map(state, (data, key) => {
 						return (
@@ -147,7 +150,7 @@ function App() {
 						);
 					})}
 				</DragDropContext>
-			</div>
+			</div> */}
 		</div>
 	);
 }
